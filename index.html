@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Login & Profile Manager</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('img1.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            transition: background-image 0.5s ease-in-out;
+        }
+        header {
+           
+            color: rgb(9, 9, 9);
+            padding: 5px 8px;
+            text-align: center;
+        }
+        .container {
+            max-width: 500px;
+            margin: 60px auto;
+            padding: 20px;
+            background: rgb(205, 200, 200);
+            border-radius: 3px;
+            text-align: center;
+            text-align: left;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        form label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        form input {
+            margin-bottom: 10px;
+            padding: 6px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 1px;
+        }
+        form button {
+            background-color: #333;
+            color: white;
+            padding: 8px;
+            font-size: 14px;
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+        }
+        form button:hover {
+            background-color: #555;
+        }
+        .hidden {
+            display: none;
+        }
+        .change-bg-btn {
+            margin-top: 10px;
+            background-color: #ffffff;
+            color: rgb(6, 6, 6);
+        }
+        .change-bg-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Interactive Login & Profile Manager</h1>
+    </header>
+
+    <div class="container" id="login">
+        <h2>Login Page</h2>
+        <form onsubmit="return handleLogin()">
+            <label for="username">Username</label>
+            <input type="text" id="username" required>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" required>
+
+            <button type="submit">Login</button>
+        </form>
+        <button class="change-bg-btn" onclick="changeBackground()">Next Background Image</button>
+    </div>
+
+    <div class="container hidden" id="userInfo">
+        <h2>User Information Page</h2>
+        <form onsubmit="return handleUserInfo()">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" required>
+
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" required>
+
+            <label for="mobile">Mobile Number</label>
+            <input type="text" id="mobile" required>
+
+            <label for="dob">Date of Birth</label>
+            <input type="date" id="dob" required>
+
+            <label for="occupation">Occupation</label>
+            <input type="text" id="occupation" required>
+
+            <button type="submit">Next</button>
+        </form>
+        <button class="change-bg-btn" onclick="changeBackground()">Next Background Image</button>
+    </div>
+
+    <div class="container hidden" id="profile">
+        <h2>Personal Profile Page</h2>
+        <p id="profileName"></p>
+        <p id="profileEmail"></p>
+        <p id="profileMobile"></p>
+        <p id="profileDOB"></p>
+        <p id="profileOccupation"></p>
+        <button class="change-bg-btn" onclick="changeBackground()">Next Background Image</button>
+    </div>
+
+    <script>
+        const backgrounds = ['img2.jpg', 'img3.jpg', 'img4.jpg', 'img5.jpg', 'img6.jpg'];
+        let currentBackground = 1;
+
+        function changeBackground() {
+            currentBackground = (currentBackground + 1) % backgrounds.length;
+            document.body.style.backgroundImage = `url('${backgrounds[currentBackground]}')`;
+        }
+
+        function handleLogin() {
+            document.getElementById('login').classList.add('hidden');
+            document.getElementById('userInfo').classList.remove('hidden');
+            return false;
+        }
+
+        function handleUserInfo() {
+            const firstName = document.getElementById('firstName').value;
+            const lastName = document.getElementById('lastName').value;
+            const email = document.getElementById('email').value;
+            const mobile = document.getElementById('mobile').value;
+            const dob = document.getElementById('dob').value;
+            const occupation = document.getElementById('occupation').value;
+
+            document.getElementById('profileName').innerText = `Name: ${firstName} ${lastName}`;
+            document.getElementById('profileEmail').innerText = `Email: ${email}`;
+            document.getElementById('profileMobile').innerText = `Mobile: ${mobile}`;
+            document.getElementById('profileDOB').innerText = `Date of Birth: ${dob}`;
+            document.getElementById('profileOccupation').innerText = `Occupation: ${occupation}`;
+
+            document.getElementById('userInfo').classList.add('hidden');
+            document.getElementById('profile').classList.remove('hidden');
+            return false;
+        }
+    </script>
+</body>
+</html>
